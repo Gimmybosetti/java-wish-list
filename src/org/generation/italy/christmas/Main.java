@@ -12,7 +12,12 @@ public class Main {
 		ArrayList<String> desideri = new ArrayList<String>();
 		Scanner scan = new Scanner(System.in);
 		boolean fermarsi = false;
-		String continuare = "";
+		String continuare = "", nome = "", indirizzo = "";
+		
+		System.out.println("Come ti chiami?");
+		nome = scan.nextLine();
+		System.out.println("A che indirizzo dovremo spedire i regali?");
+		indirizzo = scan.nextLine();
 		
 		while(!fermarsi) {
 			System.out.println("Inserisci un nuovo desiderio:");
@@ -29,6 +34,23 @@ public class Main {
 			}
 		}
 		
+		LetteraBabboNatale lettera = new LetteraBabboNatale(nome, indirizzo, desideri);
+		
+		System.out.println("Vuoi inviare la tua lista a Babbo Natale? (si/no)");
+		continuare = scan.nextLine();
+		
+		if(continuare.equalsIgnoreCase("si")) {
+			try {
+				System.out.print(lettera.invia(nome, indirizzo, desideri));
+			}catch(Exception e) {
+				System.out.println("Mi spiace, le lettere con più di 5 desideri non vanno bene!");
+			}
+		}
+		
+		System.out.print("\n-------------------------------------------------------");  //divisore per stampa lista
+		
+		
+		//consegna iniziale
 		Collections.sort(desideri);
 		Iterator<String> iterator = desideri.iterator();
 		
